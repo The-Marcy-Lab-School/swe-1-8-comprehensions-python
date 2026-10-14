@@ -6,9 +6,11 @@ from from_scratch import (
     count_by_category,
     double_every_number,
     first_sold_out,
+    flatten,
     in_stock,
     label_each,
     long_words,
+    only_numbers,
     pair_up,
     total_price,
 )
@@ -103,3 +105,29 @@ def test_all_in_stock():
     assert all_in_stock(PRODUCTS) is False
     assert all_in_stock([PRODUCTS[0], PRODUCTS[2]]) is True
     assert all_in_stock([]) is True
+
+
+def test_flatten():
+    """flatten - one flat list out of a list of rows"""
+    assert flatten([[1, 2], [3, 4]]) == [1, 2, 3, 4]
+    assert flatten([[1], [], [2, 3]]) == [1, 2, 3]
+    assert flatten([]) == []
+
+
+def test_flatten_leaves_the_rows_alone():
+    """flatten - the grid that went in is unchanged"""
+    grid = [[1, 2], [3]]
+    flatten(grid)
+    assert grid == [[1, 2], [3]]
+
+
+def test_only_numbers():
+    """only_numbers - keeps ints and floats, drops everything else"""
+    assert only_numbers([1, "two", 3.5, None, 4]) == [1, 3.5, 4]
+    assert only_numbers(["a", None]) == []
+    assert only_numbers([]) == []
+
+
+def test_only_numbers_drops_booleans():
+    """only_numbers - a bool is an int, and still does not count"""
+    assert only_numbers([True, 7, False]) == [7]
