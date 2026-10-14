@@ -210,8 +210,9 @@ count_by_category([])
 This one is **not** a comprehension either. You are building a dictionary up
 as you go, and each step depends on what is already in it.
 
-Hint: `counts.get(key, 0)` hands back the count so far, or `0` the first time
-you see a category. That saves checking whether the key is there.
+Hint: a dictionary's `.get()` takes a second argument, which it returns when
+the key is not there yet. That saves writing an `if` to check whether you have
+seen a category before.
 
 ### Question 8: `label_each`
 
